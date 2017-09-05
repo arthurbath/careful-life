@@ -1,0 +1,371 @@
+/* Reset */
+* {
+	box-sizing: border-box;
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	font: inherit;
+	font-size: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+	content: '';
+	content: none;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+/* Fonts */
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: Entypo;
+	src: url('entypo.woff') format('woff');
+}
+
+/* Pervasives */
+html,
+body {
+	overflow: hidden;
+	height: 100%;
+}
+
+#sky,
+#earth,
+#channels,
+#tv,
+#body,
+#dragspace,
+#headgrid,
+.rubble,
+#dog {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#dog {
+	position: fixed;
+	bottom: -30px;
+	left: -200px;
+	z-index: 10;
+	width: 200px;
+}
+
+.rubble {
+	position: absolute;
+	z-index: 9;
+	color: #fff;
+	text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+	font-weight: normal;
+	font-size: 40px;
+	font-family: Entypo;
+	opacity: 0;
+}
+
+#head {
+	position: absolute;
+	bottom: 400px;
+	left: 50%;
+	z-index: 8;
+	display: block;
+	margin-left: 158px;
+	width: 54px;
+	cursor: pointer;
+}
+
+#head[src='up.png'] {
+	padding-bottom: -8px;
+	padding-left: 8px;
+}
+
+#head[src='down.png'] {
+	padding-bottom: -8px;
+}
+
+#head[src='left.png'] {
+	padding-left: -1px;
+}
+
+#head[src='right.png'] {
+	padding-left: 3px;
+}
+
+#headgrid {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 7;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+#headgrid td {
+	border: 1px solid black;
+}
+
+#headgrid .center {
+	width: 80px;
+	height: 120px;
+}
+
+#headgrid .down {
+	height: 385px;
+}
+
+#headgrid .left:first-of-type {
+	width: 50%;
+}
+#headgrid .left:nth-of-type(2) {
+	width: 145px;
+}
+
+#dragspace {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 6;
+	margin-left: -158px;
+}
+
+#body {
+	position: absolute;
+	bottom: 140px;
+	left: 50%;
+	z-index: 5;
+	margin-left: 105px;
+	width: 145px;
+}
+
+#body img {
+	width: 100%;
+}
+
+#tv {
+	position: absolute;
+	bottom: 100px;
+	left: 50%;
+	z-index: 4;
+	width: 250px;
+}
+
+#tv img {
+	width: 100%;
+}
+
+#channels {
+	position: absolute;
+	bottom: 104px;
+	left: 50%;
+	z-index: 3;
+	overflow: hidden;
+	margin-left: 5px;
+	width: 190px;
+}
+
+#channels img {
+	width: 100%;
+}
+
+#earth {
+	position: absolute;
+	bottom: 0;
+	z-index: 2;
+	width: 100%;
+	height: 200px;
+	background: #4d5a22;
+	box-shadow: inset 0 100px 100px rgba(200, 200, 25, .5);
+}
+
+#sky {
+	position: relative;
+	width: 100%;
+}
+
+#sky div {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+}
+
+#sky div:nth-of-type(5n-4) {
+	background-color: #bbb8be;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#c99684), to(#addaf8));
+	background-image: -webkit-linear-gradient(top, #c99684, #addaf8);
+	background-image: -moz-linear-gradient(top, #c99684, #addaf8);
+	background-image: -o-linear-gradient(top, #c99684, #addaf8);
+	background-image: -ms-linear-gradient(top, #c99684, #addaf8);
+	background-image: linear-gradient(top, #c99684, #addaf8);
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#c99684', EndColorStr='#addaf8');
+}
+
+#sky div:nth-of-type(5n-3) {
+	background-color: #6bb8f8;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#addaf8), to(#2996f8));
+	background-image: -webkit-linear-gradient(top, #addaf8, #2996f8);
+	background-image: -moz-linear-gradient(top, #addaf8, #2996f8);
+	background-image: -o-linear-gradient(top, #addaf8, #2996f8);
+	background-image: -ms-linear-gradient(top, #addaf8, #2996f8);
+	background-image: linear-gradient(top, #addaf8, #2996f8);
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#addaf8', EndColorStr='#2996f8');
+}
+
+#sky div:nth-of-type(5n-2) {
+	background-color: #226ab0;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#2996f8), to(#1c3e69));
+	background-image: -webkit-linear-gradient(top, #2996f8, #1c3e69);
+	background-image: -moz-linear-gradient(top, #2996f8, #1c3e69);
+	background-image: -o-linear-gradient(top, #2996f8, #1c3e69);
+	background-image: -ms-linear-gradient(top, #2996f8, #1c3e69);
+	background-image: linear-gradient(top, #2996f8, #1c3e69);
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#2996f8', EndColorStr='#1c3e69');
+}
+
+#sky div:nth-of-type(5n-1) {
+	background-color: #283a62;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#1c3e69), to(#34365c));
+	background-image: -webkit-linear-gradient(top, #1c3e69, #34365c);
+	background-image: -moz-linear-gradient(top, #1c3e69, #34365c);
+	background-image: -o-linear-gradient(top, #1c3e69, #34365c);
+	background-image: -ms-linear-gradient(top, #1c3e69, #34365c);
+	background-image: linear-gradient(top, #1c3e69, #34365c);
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#1c3e69', EndColorStr='#34365c');
+}
+
+#sky div:nth-of-type(5n) {
+	background-color: #7e6670;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#34365c), to(#c99684));
+	background-image: -webkit-linear-gradient(top, #34365c, #c99684);
+	background-image: -moz-linear-gradient(top, #34365c, #c99684);
+	background-image: -o-linear-gradient(top, #34365c, #c99684);
+	background-image: -ms-linear-gradient(top, #34365c, #c99684);
+	background-image: linear-gradient(top, #34365c, #c99684);
+	filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#34365c', EndColorStr='#c99684');
+}
+
+#storage {
+	font-family: Entypo;
+	opacity: 0;
+	speak: none;
+}
