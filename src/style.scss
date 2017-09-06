@@ -85,34 +85,25 @@ body {
 	}
 }
 
-.headgrid {
+.head-grid {
 	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 7;
 	width: 100%;
 	height: 100%;
-	opacity: 0;
 
-	td {
-		border: 1px solid black;
-	}
-
-	.center {
+	&__center {
 		width: 80px;
 		height: 120px;
 	}
 
-	.down {
+	&__down {
 		height: 385px;
 	}
 
-	.left:first-of-type {
-		width: 50%;
-	}
-
-	.left:nth-of-type(2) {
-		width: 145px;
+	&__left {
+		width: calc(50vw + 145px); // Account for figure offset
 	}
 }
 
