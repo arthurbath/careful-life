@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let headImage = document.querySelectorAll('.js__head')[0]
 	let headChangePanels = document.querySelectorAll('.js__head-change-panel')
 
-	// Change head when mousing over head-grid
+	// Change head when mousing over head change grid
 	headChangePanels.forEach(panel => {
 		panel.addEventListener('mouseenter', () => {
 			headImage.src = `${panel.dataset.direction}.png`
