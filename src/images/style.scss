@@ -1,0 +1,33 @@
+@import 'normalize.css/normalize.css';
+
+$fail-color: #bb0000;
+$success-color: #00bb00;
+
+.test {
+	display: flex;
+
+	&__case {
+		margin-left: 0.5rem;
+
+		&--pass {
+			color: $success-color;
+		}
+
+		&--fail {
+			color: $fail-color;
+		}
+
+		&--styles.test__case--fail {
+			display: none;
+		}
+
+		&--styles.test__case--pass {
+			display: inline !important;
+		}
+
+		&--images {
+			margin-top: 0.2em;
+			height: 0.72em;
+		}
+	}
+}
