@@ -145,7 +145,6 @@ $sky-background-size: length($sky-shades) * 100%;
 	display: block;
 	width: 54px;
 	cursor: pointer;
-	transition: transform 0.5s, opacity 3s linear;
 
 	&[src='up.png'] {
 		padding-bottom: -8px;
@@ -165,10 +164,13 @@ $sky-background-size: length($sky-shades) * 100%;
 	}
 
 	&--dropped {
+		transition: transform 0.5s, top 0.5s linear; // Specify transition after dragging has stopped
+		top: var(--head-drop-floor) !important; // Override inline top added by drag+drop
 		transform: rotate(var(--head-tilt-angle));
 	}
 
 	&--faded {
+		transition: opacity 2.5s linear;
 		opacity: 0;
 	}
 }
@@ -183,6 +185,11 @@ $sky-background-size: length($sky-shades) * 100%;
 	font-size: 40px;
 	font-family: Entypo;
 	opacity: 0;
+	transition: opacity 2s;
+
+	&--appeared {
+		opacity: 1;
+	}
 }
 
 /* Dog */
