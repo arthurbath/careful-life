@@ -86,7 +86,9 @@ $sky-background-size: length($sky-shades) * 100%;
 		background-image: linear-gradient(to bottom, $sky-shades, nth($sky-shades, 1)); // End with first value repeated
 		background-size: auto $sky-background-size;
 		background-position: 100% 0;
-		animation: scroll-sky $sky-speed infinite;
+		animation-name: scroll-sky;
+		animation-duration: $sky-speed;
+		animation-iteration-count: infinite;
 		animation-fill-mode: forwards;
 		animation-timing-function: linear;
 	}
@@ -95,7 +97,9 @@ $sky-background-size: length($sky-shades) * 100%;
 		width: 100%;
 		height: 200px;
 		background-color: #4d5a22;
-		animation: shade-earth ($sky-speed / 4) infinite; // Sync earth transition with sky
+		animation-name: shade-earth;
+		animation-duration: $sky-speed / 4; // Sync earth transition with sky
+		animation-iteration-count: infinite;
 		animation-fill-mode: forwards;
 		animation-timing-function: linear;
 	}
@@ -192,12 +196,31 @@ $sky-background-size: length($sky-shades) * 100%;
 }
 
 /* Dog */
+@keyframes walk-dog {
+
+	0% {
+		left: -200px;
+	}
+
+	100% {
+		left: 100%;
+	}
+}
+
 .dog {
 	position: fixed;
 	bottom: -30px;
 	left: -200px;
 	z-index: 7;
 	width: 200px;
+
+	&--walking {
+		animation-name: walk-dog;
+		animation-duration: 7s;
+		animation-timing-function: linear;
+		animation-iteration-count: 1;
+		// animation-fill-mode: forwards;
+	}
 }
 
 /* Head change grid */

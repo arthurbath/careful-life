@@ -76,9 +76,10 @@ $(document).ready(function () {
 
 				$(this).fadeOut(3000)
 
-				$('.dog').animate({ left: '100%' }, 7000, 'linear', function () {
-					$('.dog').css('left', -200)
-				})
+				// Start walking dog after 4 seconds
+				setTimeout(() => {
+					document.querySelector('.dog').classList.add('dog--walking')
+				}, 4000)
 			})
 		},
 	})
