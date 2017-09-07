@@ -137,6 +137,18 @@ $sky-background-size: length($sky-shades) * 100%;
 }
 
 /* Art head */
+@keyframes drop-head {
+
+	0% {
+		top: var(--head-drop-ceiling);
+	}
+
+	100% {
+		top: var(--head-drop-floor);
+		transform: rotate(var(--head-tilt-angle));
+	}
+}
+
 .art-head {
 	position: absolute;
 	bottom: 400px;
@@ -164,9 +176,11 @@ $sky-background-size: length($sky-shades) * 100%;
 	}
 
 	&--dropped {
-		transition: transform 0.5s, top 0.5s linear; // Specify transition after dragging has stopped
-		top: var(--head-drop-floor) !important; // Override inline top added by drag+drop
-		transform: rotate(var(--head-tilt-angle));
+		animation-name: drop-head; // Use animation instead of transition to not conflict with Draggabilly
+		animation-duration: 0.5s;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in;
 	}
 
 	&--faded {

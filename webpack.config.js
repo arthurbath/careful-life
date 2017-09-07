@@ -86,11 +86,6 @@ module.exports = (env = {}) => ({
 	},
 	plugins: [
 		new webpack.NoEmitOnErrorsPlugin(),
-		new webpack.ProvidePlugin({
-			'$': 'jquery',
-			'jQuery': 'jquery',
-			'window.jQuery': 'jquery',
-		}),
 		new CleanWebpackPlugin(['build'], {
 			'verbose': false,
 		}),

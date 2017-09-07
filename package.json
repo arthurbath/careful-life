@@ -7,8 +7,7 @@
 	"license": "ISC",
 	"main": "index.js",
 	"dependencies": {
-		"jquery": "^3.2.1",
-		"jquery-ui": "^1.12.1",
+		"draggabilly": "^2.1.1",
 		"lodash": "^4.17.4",
 		"normalize.css": "^7.0.0",
 		"reset-css": "^2.2.1"
