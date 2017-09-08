@@ -15,6 +15,7 @@ document.documentElement.style.setProperty('--head-tilt-angle', `${tiltAngle * t
 // DOM init
 document.addEventListener('DOMContentLoaded', () => {
 	let artHead = document.querySelector('.art-head')
+	let tv = document.querySelector('.tv')
 	let tvChannel = document.querySelector('.tv__channel')
 	let headChangeGrid = document.querySelector('.head-change-grid')
 
@@ -47,9 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		artHead.src = 'ahh.png'
 		tvChannel.src = 'eye.gif'
 
+		// Determine random space in front of TV to which the head will drop
+		const tvBottom = parseFloat(window.getComputedStyle(tv).bottom) // The space between the TV and the bottom of the screen
+		const dropZone = tvBottom * 0.8 // The area in which the head will be allowed to drop
+		const dropPadding = tvBottom * 0.1 // Padding from the bottom of the screen
+		const artHeadHeight = parseFloat(window.getComputedStyle(artHead).height)
+
+		const headDropFloor = Math.random() * dropZone + dropPadding // Random number between 10–90, the desired offset from the bottom
+		const headDropTop = window.innerHeight - artHeadHeight - headDropFloor
+
 		// Set head start and end drop positions for CSS
 		document.documentElement.style.setProperty('--head-drop-ceiling', `${draggableHead.position.y}px`)
-		document.documentElement.style.setProperty('--head-drop-floor', `${window.innerHeight - Math.random() * 90 - 70}px`) // Random floor between 70 and 160 from bottom
+		document.documentElement.style.setProperty('--head-drop-floor', `${headDropTop}px`)
 
 		artHead.classList.add('art-head--dropped')
 
@@ -62,16 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			tvChannel.src = 'static.gif'
 
-			// Get head's position
-			let { top, left } = window.getComputedStyle(artHead)
-
-			// Strip units (px), and pad for aesthetics
-			const headY = parseFloat(top.replace(/[^0-9.]/g, '')) - 15
-			const headX = parseFloat(left.replace(/[^0-9.]/g, '')) - 20
-
 			let rubble = document.querySelector('.rubble')
-			rubble.style.top = `${headY}px`
-			rubble.style.left = `${headX}px`
+			rubble.style.bottom = `${headDropFloor}px` // Set bottom instead of top to stick rubble to ground on resize
+			rubble.style.left = `${parseFloat(window.getComputedStyle(artHead).left) - 20}px` // -20 for aesthetics
 
 			// Set a random symbol and fade-in delay for each piece of rubble
 			document.querySelectorAll('.rubble__bit').forEach(rubbleBit => {

@@ -200,8 +200,6 @@ $rubble-bit-coord-rows: ((5, 7)),
 
 .rubble {
 	position: absolute;
-	top: 0;
-	left: 0;
 	z-index: 6;
 	display: grid;
 	grid-template-columns: repeat(10, 10px);
@@ -212,6 +210,7 @@ $rubble-bit-coord-rows: ((5, 7)),
 	font-family: Entypo;
 	text-align: center;
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	line-height: 0; // Align symbols with tops of containers instead of baselines
 
 	&__bit {
 		opacity: 0;
