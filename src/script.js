@@ -66,51 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
 			let { top, left } = window.getComputedStyle(artHead)
 
 			// Strip units (px), and pad for aesthetics
-			const headX = parseFloat(left.replace(/[^0-9.]/g, '')) + 20
-			const headY = parseFloat(top.replace(/[^0-9.]/g, '')) - 5
+			const headY = parseFloat(top.replace(/[^0-9.]/g, '')) - 15
+			const headX = parseFloat(left.replace(/[^0-9.]/g, '')) - 20
 
-			// Set coordinates of rubble pyramid
-			const rubbleCoords = [
-				// Top
-				{ x: headX, y: headY },
-				// Tier 2
-				{ x: headX + 10, y: headY + 14 },
-				{ x: headX - 10, y: headY + 14 },
-				// Tier 3
-				{ x: headX + 20, y: headY + 28 },
-				{ x: headX, y: headY + 28 },
-				{ x: headX - 20, y: headY + 28 },
-				// Tier 4
-				{ x: headX + 30, y: headY + 42 },
-				{ x: headX + 10, y: headY + 42 },
-				{ x: headX - 10, y: headY + 42 },
-				{ x: headX - 30, y: headY + 42 },
-				// Tier 5
-				{ x: headX + 40, y: headY + 56 },
-				{ x: headX + 20, y: headY + 56 },
-				{ x: headX, y: headY + 56 },
-				{ x: headX - 20, y: headY + 56 },
-				{ x: headX - 40, y: headY + 56 }
-			]
+			let rubble = document.querySelector('.rubble')
+			rubble.style.top = `${headY}px`
+			rubble.style.left = `${headX}px`
 
-			// For each of the coordinates specified, append a piece of rubble to the body
-			rubbleCoords.forEach(rubbleCoord => {
-				let rubble = document.createElement('div')
-				rubble.classList.add('rubble')
-				rubble.style.top = `${rubbleCoord.y}px`
-				rubble.style.left = `${rubbleCoord.x}px`
-				rubble.textContent = rubbleSymbols[Math.floor(Math.random() * rubbleSymbols.length)]
-
-				document.body.appendChild(rubble)
-			})
-
-			// Fade in rubble after random short delays
-			document.querySelectorAll('.rubble').forEach(rubble => {
-				const randomDelay = Math.random() * 1000 + 500 // Random time between 0.5–1.5s
+			// Set a random symbol and fade-in delay for each piece of rubble
+			document.querySelectorAll('.rubble__bit').forEach(rubbleBit => {
+				rubbleBit.textContent = rubbleSymbols[Math.floor(Math.random() * rubbleSymbols.length)]
 
 				setTimeout(() => {
-					rubble.classList.add('rubble--appeared')
-				}, randomDelay)
+					rubbleBit.classList.add('rubble__bit--appeared')
+				}, Math.random() * 1000 + 500) // Random time between 0.5–1.5s
 			})
 
 			// Fade out head

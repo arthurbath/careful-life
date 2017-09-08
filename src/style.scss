@@ -190,19 +190,69 @@ $sky-background-size: length($sky-shades) * 100%;
 }
 
 /* Rubble */
+/* stylelint-disable */
+$rubble-bit-coord-rows: ((5, 7)),
+                        ((4, 6), (6, 8)),
+                        ((3 ,5), (5, 7), (7, 9)),
+                        ((2, 4), (4, 6), (6, 8), (8, 10)),
+                        ((1, 3), (3, 5), (5, 7), (7, 9), (9, 11));
+/* stylelint-enable */
+
 .rubble {
 	position: absolute;
+	top: 0;
+	left: 0;
 	z-index: 6;
+	display: grid;
+	grid-template-columns: repeat(10, 10px);
+	grid-template-rows: repeat(5, 14px);
 	color: #fff;
-	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 	font-weight: 400;
 	font-size: 40px;
 	font-family: Entypo;
-	opacity: 0;
-	transition: opacity 2s;
+	text-align: center;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-	&--appeared {
-		opacity: 1;
+	&__bit {
+		opacity: 0;
+		transition: opacity 2s;
+		$rubble-bit-total: 0;
+
+		@for $i from 1 through length($rubble-bit-coord-rows) {
+			$rubble-bit-coord-row: nth($rubble-bit-coord-rows, $i);
+
+			// If the first item is a number instead of a list, define rule (Sass collapses nested single-item lists)
+			@if type-of(nth($rubble-bit-coord-row, 1)) == 'number' {
+				$rubble-bit-coord: $rubble-bit-coord-row;
+				$rubble-bit-total: $rubble-bit-total + 1;
+
+				&:nth-of-type(#{$rubble-bit-total}) {
+					grid-column-start: nth($rubble-bit-coord, 1);
+					grid-column-end: nth($rubble-bit-coord, 2);
+					grid-row-start: $i;
+					grid-row-end: $i;
+				}
+			}
+
+			@else {
+
+				@for $j from 1 through length($rubble-bit-coord-row) {
+					$rubble-bit-coord: nth($rubble-bit-coord-row, $j);
+					$rubble-bit-total: $rubble-bit-total + 1;
+
+					&:nth-of-type(#{$rubble-bit-total}) {
+						grid-column-start: nth($rubble-bit-coord, 1);
+						grid-column-end: nth($rubble-bit-coord, 2);
+						grid-row-start: $i;
+						grid-row-end: $i;
+					}
+				}
+			}
+		}
+
+		&--appeared {
+			opacity: 1;
+		}
 	}
 }
 
