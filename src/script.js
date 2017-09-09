@@ -16,13 +16,13 @@ document.documentElement.style.setProperty('--head-tilt-angle', `${tiltAngle * t
 document.addEventListener('DOMContentLoaded', () => {
 	let artHead = document.querySelector('.art-head')
 	let tv = document.querySelector('.tv')
-	let tvChannel = document.querySelector('.tv__channel')
+	let tvScreen = document.querySelector('.tv__screen')
 	let headChangeGrid = document.querySelector('.head-change-grid')
 
 	// Change head when mousing over head change grid
 	document.querySelectorAll('.head-change-grid__trigger').forEach(trigger => {
 		trigger.addEventListener('mouseenter', () => {
-			artHead.src = `${trigger.dataset.direction}.png` // After Webpack build, image directory is flattened
+			artHead.dataset.face = trigger.dataset.direction
 		})
 	})
 
@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	draggableHead.on('pointerDown', () => {
-		artHead.src = 'ahh.png'
-		tvChannel.src = 'maybe.gif'
+		artHead.dataset.face = 'ahh'
+		tvScreen.dataset.channel = 'maybe'
 	})
 
 	draggableHead.on('pointerUp', () => {
-		artHead.src = 'center.png'
-		tvChannel.src = 'static.gif'
+		artHead.dataset.face = 'center'
+		tvScreen.dataset.channel = 'static'
 	})
 
 	draggableHead.on('dragStart', () => {
@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	draggableHead.on('dragEnd', () => {
-		artHead.src = 'ahh.png'
-		tvChannel.src = 'eye.gif'
+		artHead.dataset.face = 'ahh'
+		tvScreen.dataset.channel = 'eye'
 
 		// Determine random space in front of TV to which the head will drop
 		const tvBottom = parseFloat(window.getComputedStyle(tv).bottom) // The space between the TV and the bottom of the screen
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Remove listener so that postDrop only runs once
 			event.target.removeEventListener(event.type, postDrop)
 
-			tvChannel.src = 'static.gif'
+			tvScreen.dataset.channel = 'static'
 
 			let rubble = document.querySelector('.rubble')
 			rubble.style.bottom = `${headDropFloor}px` // Set bottom instead of top to stick rubble to ground on resize
