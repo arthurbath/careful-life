@@ -8,6 +8,98 @@
 	src: url('fonts/entypo.woff') format('woff');
 }
 
+@font-face {
+	font-weight: 100;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-100.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 200;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-200.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 300;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-300.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-400.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 500;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-500.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 600;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-600.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 700;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-700.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 800;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-800.woff') format('woff');
+}
+
+@font-face {
+	font-weight: 900;
+	font-style: normal;
+	font-family: Lato;
+	src: url('fonts/lato-900.woff') format('woff');
+}
+
+/* Mixins */
+@mixin media-sm {
+
+	@media (min-width: 576px) {
+		@content;
+	}
+}
+
+@mixin media-md {
+
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin media-lg {
+
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+@mixin media-xl {
+
+	@media (min-width: 1200px) {
+		@content;
+	}
+}
+
 /* Pervasives */
 * {
 	user-select: none;
@@ -17,6 +109,33 @@ html,
 body {
 	overflow: hidden;
 	height: 100%;
+}
+
+/* Content */
+.content {
+	z-index: 5;
+	color: white;
+	position: absolute;
+	top: 10%;
+	left: 19vw;
+	line-height: 1.5;
+	font-family: Lato;
+	font-weight: 300;
+	font-size: 15px;
+
+	@include media-md {
+		font-size: 20px;
+	}
+
+	&__title {
+		font-size: 2em;
+		font-weight: 500;
+	}
+
+	&__link {
+		color: white;
+		text-decoration: none;
+	}
 }
 
 /* Preloader */
@@ -114,10 +233,10 @@ $sky-background-size: length($sky-shades) * 100%;
 	&__screen {
 		position: absolute;
 		z-index: 1;
-		bottom: 6px;
-		left: 5px;
-		width: 190px;
-		height: 140px;
+		bottom: 5%;
+		left: 3%;
+		width: 75%;
+		height: 70%;
 		background-size: cover;
 
 		&[data-channel='static'] {
@@ -136,7 +255,11 @@ $sky-background-size: length($sky-shades) * 100%;
 	&__set {
 		position: relative;
 		z-index: 2;
-		width: 250px;
+		width: 150px;
+
+		@include media-md {
+			width: 250px;
+		}
 	}
 }
 
@@ -146,8 +269,13 @@ $sky-background-size: length($sky-shades) * 100%;
 	bottom: 140px;
 	left: 50%;
 	z-index: 3;
-	margin-left: 105px;
-	width: 145px;
+	margin-left: 70px;
+	width: 72px;
+
+	@include media-md {
+		margin-left: 90px;
+		width: 145px;
+	}
 }
 
 /* Art head */
@@ -165,15 +293,22 @@ $sky-background-size: length($sky-shades) * 100%;
 
 .art-head {
 	position: absolute;
-	bottom: 400px;
-	left: calc(50% + 158px);
+	bottom: 266px;
+	left: calc(50% + 96px);
 	z-index: 5;
 	display: block;
-	width: 54px;
-	height: 94px;
+	width: 27px;
+	height: 47px;
 	background-size: contain;
 	background-repeat: no-repeat;
 	cursor: pointer;
+
+	@include media-md {
+		bottom: 400px;
+		left: calc(50% + 143px);
+		width: 54px;
+		height: 94px;
+	}
 
 	&[data-face='center'] {
 		background-image: url('images/center.png');
@@ -231,15 +366,22 @@ $rubble-bit-coord-rows: ((5, 7)),
 	position: absolute;
 	z-index: 6;
 	display: grid;
-	grid-template-columns: repeat(10, 10px);
-	grid-template-rows: repeat(5, 14px);
+	grid-template-columns: repeat(10, 5px);
+	grid-template-rows: repeat(5, 7px);
 	color: #fff;
-	font-weight: 400;
-	font-size: 40px;
 	font-family: Entypo;
+	font-size: 20px;
+	font-weight: 400;
 	text-align: center;
-	text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 	line-height: 0; // Align symbols with tops of containers instead of baselines
+
+	@include media-md {
+		grid-template-columns: repeat(10, 10px);
+		grid-template-rows: repeat(5, 14px);
+		font-size: 40px;
+		text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	}
 
 	&__bit {
 		opacity: 0;
@@ -287,11 +429,16 @@ $rubble-bit-coord-rows: ((5, 7)),
 /* Dog */
 .dog {
 	position: fixed;
-	bottom: -30px;
-	left: -200px;
+	bottom: -15px;
+	left: -200px; // Always furthest left to prevent peek during window resize
 	z-index: 7;
-	width: 200px;
+	width: 100px;
 	transition: left 7s linear;
+
+	@include media-md {
+		bottom: -30px;
+		width: 200px;
+	}
 
 	&--walked {
 		left: 100%;
