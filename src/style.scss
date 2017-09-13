@@ -316,18 +316,31 @@ $sky-background-size: length($sky-shades) * 100%;
 
 	&[data-face='up'] {
 		background-image: url('images/up.png');
-		margin-bottom: -8px;
-		margin-left: 8px;
+		margin-bottom: -4px;
+		margin-left: 4px;
+
+		@include media-md {
+			margin-bottom: -8px;
+			margin-left: 8px;
+		}
 	}
 
 	&[data-face='right'] {
 		background-image: url('images/right.png');
-		margin-left: 3px;
+		margin-left: 1px;
+
+		@include media-md {
+			margin-left: 3px;
+		}
 	}
 
 	&[data-face='down'] {
 		background-image: url('images/down.png');
-		margin-bottom: -8px;
+		margin-bottom: -4px;
+
+		@include media-md {
+			margin-bottom: -8px;
+		}
 	}
 
 	&[data-face='left'] {
@@ -461,16 +474,29 @@ $rubble-bit-coord-rows: ((5, 7)),
 	&__trigger {
 
 		&--center {
-			width: 80px;
-			height: 120px;
+			width: 40px;
+			height: 60px;
+
+			@include media-md {
+				width: 80px;
+				height: 120px;
+			}
 		}
 
 		&--down {
-			height: 385px;
+			height: 250px;
+
+			@include media-md {
+				height: 385px;
+			}
 		}
 
 		&--left {
-			width: calc(50vw + 145px); // Account for figure offset
+			width: calc(50vw + 85px); // Account for figure offset
+
+			@include media-md {
+				width: calc(50vw + 145px);
+			}
 		}
 	}
 }
