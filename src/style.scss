@@ -381,6 +381,7 @@ $rubble-bit-coord-rows: ((5, 7)),
 	display: grid;
 	grid-template-columns: repeat(10, 5px);
 	grid-template-rows: repeat(5, 7px);
+	margin-left: -10px;
 	color: #fff;
 	font-family: Entypo;
 	font-size: 20px;
@@ -394,6 +395,7 @@ $rubble-bit-coord-rows: ((5, 7)),
 		grid-template-rows: repeat(5, 14px);
 		font-size: 40px;
 		text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		margin-left: -20px;
 	}
 
 	&__bit {

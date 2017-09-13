@@ -8,8 +8,8 @@ import Draggabilly from 'draggabilly'
 const rubbleSymbols = ['📞', '📱', '', '', '✉', '🔿', '✎', '✒', '📎', '', '', '', '➦', '👤', '👥', '', '', '', '', '', '', '➢', '🎯', '', '', '♥', '♡', '★', '☆', '👍', '👎', '', '', '❞', '⌂', '', '🔍', '🔦', '', '🔔', '🔗', '⚑', '⚙', '⚒', '🏆', '', '📷', '📣', '☽', '🎨', '🍂', '♪', '♫', '💥', '🎓', '📕', '📰', '👜', '✈', '', '', '🕔', '🎤', '📅', '⚡', '⛈', '💧', '💿', '💼', '💨', '⏳', '🛇', '🎔', '', '🔑', '🔋', '📾', '', '📽', '☕', '🚀', '', '🛆', '🛈', '🌎', '⌨', '', '', '', '', '', '', '🔅', '🔆', '◑', '', '💻', '∞', '💡', '💳', '📸', '✇', '📋', '', '📦', '🎫', '📶', '💦', '◴', '📊', '🔾', '🔒', '🔓', '⊟', '⊞', '❎', '⊖', '⊕', '✖', '⌫', '', '', '⚠', '🔄', '⟳', '⟲', '🔀', '🔙', '↳', '', '🔁', '', '↰', '⇆', '', '', '⚏', '☰', '📄', '', '', '', '', '🌄', '🎬', '🎵', '📁', '', '', '📤', '📥', '💾', '', '☁', '', '📑', '📖', '▶', '‖', '●', '■', '⏩', '⏪', '', '', '🔊', '🔇', '🕨', '🕩', '🕪', '🕬', '', '', '', '', '', '', '', '']
 
 // Set a random tilt angle for dropped head
-const tiltAngle = (Math.random() * 40 + 50)
-const tiltDirection = (Math.random() < 0.5 ? 1 : -1)
+const tiltAngle = Math.random() * 40 + 50
+const tiltDirection = Math.random() < 0.5 ? 1 : -1
 document.documentElement.style.setProperty('--head-tilt-angle', `${tiltAngle * tiltDirection}deg`)
 
 // DOM init
@@ -54,12 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		const dropPadding = tvBottom * 0.1 // Padding from the bottom of the screen
 		const artHeadHeight = parseFloat(window.getComputedStyle(artHead).height)
 
-		const headDropFloor = Math.random() * dropZone + dropPadding // Random number between 10–90, the desired offset from the bottom
-		const headDropTop = window.innerHeight - artHeadHeight - headDropFloor
+		const headDropFloor = Math.random() * dropZone + dropPadding // Random area in dropZone, the desired offset from the bottom
+		const headDropFloorTop = window.innerHeight - artHeadHeight - headDropFloor // The CSS top position for head to reach floor
 
 		// Set head start and end drop positions for CSS
 		document.documentElement.style.setProperty('--head-drop-ceiling', `${draggableHead.position.y}px`)
-		document.documentElement.style.setProperty('--head-drop-floor', `${headDropTop}px`)
+		document.documentElement.style.setProperty('--head-drop-floor', `${headDropFloorTop}px`)
 
 		artHead.classList.add('art-head--dropped')
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			let rubble = document.querySelector('.rubble')
 			rubble.style.bottom = `${headDropFloor}px` // Set bottom instead of top to stick rubble to ground on resize
-			rubble.style.left = `${parseFloat(window.getComputedStyle(artHead).left) - 20}px` // -20 for aesthetics
+			rubble.style.left = window.getComputedStyle(artHead).left
 
 			// Set a random symbol and fade-in delay for each piece of rubble
 			document.querySelectorAll('.rubble__bit').forEach(rubbleBit => {
