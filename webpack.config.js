@@ -51,30 +51,21 @@ module.exports = (env = {}) => ({
 				}],
 			}),
 		}, {
-			test: /\.(png|svg|jpe?g|gif|woff)$/,
+			test: /\.(jpe?g|png|gif|svg)$/i, // Images
 			exclude: /node_modules/,
 			use: [{
 				loader: 'file-loader',
 				options: {
 					'name': '[name].[ext]',
 				},
-			}, {
-				loader: 'image-webpack-loader',
-				query: {
-					quality: 90,
-					mozjpeg: {
-						progressive: true,
-					},
-					optipng: {
-						optimizationLevel: 3,
-					},
-					gifsicle: {
-						interlaced: false,
-					},
-					pngquant: {
-						quality: '65-90',
-						speed: 4,
-					},
+			}],
+		}, {
+			test: /\.woff$/, // Fonts
+			exclude: /node_modules/,
+			use: [{
+				loader: 'file-loader',
+				options: {
+					'name': '[name].[ext]',
 				},
 			}],
 		}],
