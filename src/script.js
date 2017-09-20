@@ -17,14 +17,47 @@ document.addEventListener('DOMContentLoaded', () => {
 	let artHead = document.querySelector('.art-head')
 	let tv = document.querySelector('.tv')
 	let tvScreen = document.querySelector('.tv__screen')
-	let headChangeGrid = document.querySelector('.head-change-grid')
 
-	// Change head when mousing over head change grid
-	document.querySelectorAll('.head-change-grid__trigger').forEach(trigger => {
-		trigger.addEventListener('mouseenter', () => {
-			artHead.dataset.face = trigger.dataset.direction
-		})
-	})
+	// Change head depending on mouse position
+	let headChange = event => {
+		// Determine head rect and center coords
+		let artHeadRect = artHead.getBoundingClientRect()
+
+		// If hovering the head, center the face
+		if ((event.clientX > artHeadRect.left && event.clientX < artHeadRect.right) && (event.clientY > artHeadRect.top && event.clientY < artHeadRect.bottom)) {
+			artHead.dataset.face = 'center'
+			return
+		}
+
+		// Center of head
+		let artHeadCenter = {
+			top: artHeadRect.top + (artHeadRect.height / 2),
+			left: artHeadRect.left + (artHeadRect.width / 2),
+		}
+
+		// Determine degree angle of mouse compared to center of head
+		let angle = Math.atan2(event.clientY - artHeadCenter.top, event.clientX - artHeadCenter.left) * 180 / Math.PI
+
+		// Set face depending on angle
+		if (angle >= -112.5 && angle <= -67.5) {
+			artHead.dataset.face = 'up'
+		}
+		else if (angle >= -22.5 && angle <= 22.5) {
+			artHead.dataset.face = 'right'
+		}
+		else if (angle >= 67.5 && angle <= 112.5) {
+			artHead.dataset.face = 'down'
+		}
+		else if ((angle >= 157.5 && angle <= 180) || (angle >= -180 && angle <= -157.5)) {
+			artHead.dataset.face = 'left'
+		}
+		else {
+			artHead.dataset.face = 'center'
+		}
+	}
+
+	// On mousemove, set appropriate face
+	document.addEventListener('mousemove', headChange)
 
 	let draggableHead = new Draggabilly(artHead, {
 		containment: '.landscape__sky',
@@ -40,12 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		tvScreen.dataset.channel = 'static'
 	})
 
+	// Destroy the head change listener when the user starts dragging
 	draggableHead.on('dragStart', () => {
-		headChangeGrid.classList.add('head-change-grid--disabled')
+		document.removeEventListener('mousemove', headChange)
+		artHead.dataset.face = 'ahh'
 	})
 
 	draggableHead.on('dragEnd', () => {
-		artHead.dataset.face = 'ahh'
+		artHead.dataset.face = 'ahh' // Set here again to disrupt pointerUp event
 		tvScreen.dataset.channel = 'eye'
 
 		// Determine random space in front of TV to which the head will drop
@@ -63,10 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		artHead.classList.add('art-head--dropped')
 
-		// Run follow-on function at the end of the CSS transition
-		artHead.addEventListener('animationend', postDrop)
-
-		function postDrop (event) {
+		// Logic to run after head has dropped
+		let postDrop = event => {
 			// Remove listener so that postDrop only runs once
 			event.target.removeEventListener(event.type, postDrop)
 
@@ -93,5 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.querySelector('.dog').classList.add('dog--walked')
 			}, 4000)
 		}
+
+		// Run follow-on function at the end of the CSS transition
+		artHead.addEventListener('animationend', postDrop)
 	})
 })
