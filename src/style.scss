@@ -141,6 +141,8 @@ body {
 /* Preloader */
 .preloader {
 	opacity: 0;
+	width: 0;
+	height: 0;
 	speak: none;
 
 	&__entypo {
@@ -292,7 +294,7 @@ $sky-background-size: length($sky-shades) * 100%;
 }
 
 .art-head {
-	position: absolute;
+	position: absolute !important; // Dragabilly override
 	bottom: 266px;
 	left: calc(50% + 96px);
 	z-index: 5;
