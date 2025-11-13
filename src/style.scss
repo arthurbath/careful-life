@@ -1,3 +1,7 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+
 @import 'reset-css/reset.css';
 
 /* Fonts */
@@ -6,69 +10,6 @@
 	font-style: normal;
 	font-family: Entypo;
 	src: url('fonts/entypo.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 100;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-100.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 200;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-200.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 300;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-300.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 400;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-400.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 500;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-500.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 600;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-600.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 700;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-700.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 800;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-800.woff') format('woff');
-}
-
-@font-face {
-	font-weight: 900;
-	font-style: normal;
-	font-family: Lato;
-	src: url('fonts/lato-900.woff') format('woff');
 }
 
 /* Mixins */
@@ -111,6 +52,14 @@ body {
 	height: 100%;
 }
 
+html:not(.is-ready) body {
+	visibility: hidden;
+}
+
+html.is-ready body {
+	visibility: visible;
+}
+
 /* Content */
 .content {
 	z-index: 5;
@@ -119,7 +68,7 @@ body {
 	top: 10%;
 	left: 19vw;
 	line-height: 1.5;
-	font-family: Lato;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 300;
 	font-size: 15px;
 
@@ -138,22 +87,10 @@ body {
 	}
 }
 
-/* Preloader */
-.preloader {
-	opacity: 0;
-	width: 0;
-	height: 0;
-	speak: none;
-
-	&__entypo {
-		font-family: Entypo;
-	}
-}
-
 /* Landscape */
 $sky-speed: 300s;
 $sky-shades: #c99684, #addaf8, #2996f8, #1c3e69, #34365c;
-$sky-background-size: length($sky-shades) * 100%;
+$sky-background-size: list.length($sky-shades) * 100%;
 
 @keyframes scroll-sky {
 
@@ -204,7 +141,7 @@ $sky-background-size: length($sky-shades) * 100%;
 	&__sky {
 		flex-grow: 1;
 		width: 100%;
-		background-image: linear-gradient(to bottom, $sky-shades, nth($sky-shades, 1)); // End with first value repeated
+		background-image: linear-gradient(to bottom, $sky-shades, list.nth($sky-shades, 1)); // End with first value repeated
 		background-size: auto $sky-background-size;
 		background-position: 100% 0;
 		animation-name: scroll-sky;
@@ -219,7 +156,7 @@ $sky-background-size: length($sky-shades) * 100%;
 		height: 200px;
 		background-color: #4d5a22;
 		animation-name: shade-earth;
-		animation-duration: $sky-speed / 4; // Sync earth transition with sky
+		animation-duration: math.div($sky-speed, 4); // Sync earth transition with sky
 		animation-iteration-count: infinite;
 		animation-fill-mode: forwards;
 		animation-timing-function: linear;
@@ -405,17 +342,17 @@ $rubble-bit-coord-rows: ((5, 7)),
 		transition: opacity 2s;
 		$rubble-bit-total: 0;
 
-		@for $i from 1 through length($rubble-bit-coord-rows) {
-			$rubble-bit-coord-row: nth($rubble-bit-coord-rows, $i);
+		@for $i from 1 through list.length($rubble-bit-coord-rows) {
+			$rubble-bit-coord-row: list.nth($rubble-bit-coord-rows, $i);
 
 			// If the first item is a number instead of a list, define rule (Sass collapses nested single-item lists)
-			@if type-of(nth($rubble-bit-coord-row, 1)) == 'number' {
+			@if meta.type-of(list.nth($rubble-bit-coord-row, 1)) == 'number' {
 				$rubble-bit-coord: $rubble-bit-coord-row;
 				$rubble-bit-total: $rubble-bit-total + 1;
 
 				&:nth-of-type(#{$rubble-bit-total}) {
-					grid-column-start: nth($rubble-bit-coord, 1);
-					grid-column-end: nth($rubble-bit-coord, 2);
+					grid-column-start: list.nth($rubble-bit-coord, 1);
+					grid-column-end: list.nth($rubble-bit-coord, 2);
 					grid-row-start: $i;
 					grid-row-end: $i;
 				}
@@ -423,13 +360,13 @@ $rubble-bit-coord-rows: ((5, 7)),
 
 			@else {
 
-				@for $j from 1 through length($rubble-bit-coord-row) {
-					$rubble-bit-coord: nth($rubble-bit-coord-row, $j);
+				@for $j from 1 through list.length($rubble-bit-coord-row) {
+					$rubble-bit-coord: list.nth($rubble-bit-coord-row, $j);
 					$rubble-bit-total: $rubble-bit-total + 1;
 
 					&:nth-of-type(#{$rubble-bit-total}) {
-						grid-column-start: nth($rubble-bit-coord, 1);
-						grid-column-end: nth($rubble-bit-coord, 2);
+						grid-column-start: list.nth($rubble-bit-coord, 1);
+						grid-column-end: list.nth($rubble-bit-coord, 2);
 						grid-row-start: $i;
 						grid-row-end: $i;
 					}
